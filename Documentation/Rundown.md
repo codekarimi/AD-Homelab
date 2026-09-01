@@ -1,78 +1,163 @@
-# AD Homelab Runbook - [Your Name]
-**Project Start Date:** [Today's Date]
+# AD Homelab Runbook
+**Author:** Clifford Karimi
+**Project Start Date:** Sep 1st 2026
+**Environment:** Windows Server 2022 Core (VirtualBox)
 
 ---
 
-## 1.0 Prerequisites
-*(We'll fill this in later)*
+## 1.0 Session Log
+
+| Date | Session | Completed | Next Session |
+|------|---------|-----------|--------------|
+| Sep 1st 2026 | Session 1 | VM Creation, Windows Installation, Network Setup, Updates, AD DS Installation, Domain Promotion | Create OUs, Groups, Users |
+---
+
+## 2.0 Project Overview
+
+### 2.1 What Is Server Core?
+Server Core is a minimal installation of Windows Server with no GUI (no Desktop, Start Menu, or File Explorer). It is managed via PowerShell and SConfig.
+
+**Why Server Core:**
+- Industry standard for enterprise servers
+- Forces PowerShell skill development
+- Uses 2-4x less RAM than Desktop Experience
+- Smaller attack surface
+- Fewer patches required
+
+### 2.2 What We Can Do With Server Core
+- ✅ Active Directory Domain Controller
+- ✅ DNS Server
+- ✅ User/Group Management
+- ✅ Group Policy
+- ✅ File/Print Services
 
 ---
 
-## 2.0 Virtual Machine Creation
-**Date:** [Today's Date]
+## 3.0 Prerequisites
+
+| Item | Version | Status |
+|------|---------|--------|
+| Hypervisor | Oracle VirtualBox (Latest) | ✅ Installed |
+| OS ISO | Windows Server 2022 Evaluation | ✅ Downloaded |
+| Source | Microsoft Evaluation Center | ✅ Acquired |
+| License | 180-day Evaluation | ✅ Active |
+
+---
+
+## 4.0 Virtual Machine Creation
+
+**Date:** Sep 1st 2026
+
+### 4.1 VM Specifications
 
 | Setting | Value |
-| :--- | :--- |
-| **VM Name** | AD-DC-01 |
+|---------|-------|
+| **VM Name** | HomelaB |
 | **OS Type** | Microsoft Windows |
 | **OS Version** | Windows Server 2022 (64-bit) |
-| **RAM Allocated** | 2048 MB (2 GB) |
+| **RAM** | 2048 MB (2 GB) |
 | **Hard Disk Type** | VDI (VirtualBox Disk Image) |
 | **Storage Type** | Dynamically allocated |
 | **Hard Disk Size** | 40 GB |
-| **File Location** | [VirtualBox default path] |
+| **ISO** | [Path to downloaded ISO] |
+
+### 4.2 Creation Steps
+1. VM named: HomelaB
+2. OS: Windows Server 2022 (64-bit)
+3. RAM: 2048 MB
+4. Hard Disk: VDI → Dynamically allocated → 40 GB
 
 ---
 
-## 3.0 Windows Server Installation
-*(We'll fill this in during the next steps)*
+## 5.0 Windows Server Installation
+
+**Date:** Sep 1st 2026
+
+### 5.1 Installation Process
+1. Booted from Windows Server 2022 ISO
+2. Installation Type: Custom (Advanced)
+3. Disk: Unallocated 40 GB selected
+4. Windows Server 2022 Standard Evaluation installed
+5. First boot → SConfig menu displayed
+
+### 5.2 Administrator Password
+
+| Credential | Value |
+|------------|-------|
+| **Username** | Administrator |
+| **Password** | *********** |
 
 ---
 
-## 4.0 Active Directory Configuration
-*(We'll fill this in later)*
+## 6.0 Network Configuration
+
+**Date:** Sep 1st 2026
+
+### 6.1 Network Settings
+
+| Setting | Value | Justification |
+|---------|-------|---------------|
+| **IP Address** | 192.168.0.10 | Static IP required for DC |
+| **Subnet Mask** | 255.255.255.0 | Default /24 network |
+| **Default Gateway** | (None) | Lab environment |
+| **Primary DNS** | 8.8.8.8 | Google DNS |
+| **Secondary DNS** | 1.1.1.1 | Cloudflare DNS |
+| **Network Mode** | NAT | Initial setup |
+
+### 6.2 Why Static IP?
+Domain Controllers require static IPs. DHCP would break domain authentication if the IP changed.
+
+### 6.3 Verification
+```powershell
+ipconfig /all          # ✅ IP: 192.168.0.10 confirmed
+ping 8.8.8.8          # ✅ Internet reachable
+ping google.com       # ✅ DNS resolution working
+
 
 ---
 
-## 5.0 Knowledge Base & Technical References
+## 7.0 Windows Updates
 
-### Naming Conventions
-- **AD-DC-01** follows standard enterprise naming:
-  - **AD** = Active Directory server role
-  - **DC** = Domain Controller function
-  - **01** = First instance (allows for future expansion)
+**Date:** Sep 1st 2026
 
-### Hardware Specifications & Justification
+### 7.1 Update Details
+- **Category:** All quality updates (Option 1)
+- **Selection:** (A)ll updates
+- **Method:** SConfig menu (Option 6)
 
-| Component | Microsoft Minimum | Our Lab | Status |
-| :--- | :--- | :--- | :--- |
-| **CPU** | 1.4 GHz | Virtualized | ✅ Meets requirement |
-| **RAM** | 2 GB | 2,048 MB | ✅ Meets requirement (Bare minimum) |
-| **Storage** | 32 GB | 40 GB | ✅ Exceeds requirement |
+### 7.2 Updates Installed
 
-**Note:** 40 GB was chosen to provide breathing room beyond Microsoft's 32 GB minimum to avoid disk space warnings during installation and updates.
+| Update ID | Description |
+|-----------|-------------|
+| KB5010475 | .NET Framework 3.5/4.8 Cumulative Update |
+| KB5121650 | .NET Framework 3.5/4.8/4.8.1 Cumulative Update |
+| KB2267602 | Microsoft Defender Antivirus Intelligence Update |
+| KB5032198 | Windows Server 21H2 Cumulative Update |
 
-### Storage Configuration
-- **VDI (VirtualBox Disk Image):** Native VirtualBox format
-- **Dynamically allocated:** The VDI file starts at ~1 GB and grows as data is added, saving host disk space
-- **Location:** VirtualBox default path in [Your Username]/VirtualBox VMs/
-
-### Networking (Current Configuration)
-- **Mode:** NAT (Network Address Translation)
-- **Purpose:** Provides internet access for Windows updates during installation
-- **Future Plan:** Will switch to Bridged mode when joining clients to the domain
-
-### VirtualBox Networking Modes Reference
-
-| Mode | Host-to-VM | VM-to-Internet | Use Case |
-| :--- | :--- | :--- | :--- |
-| **NAT** | ❌ No | ✅ Yes | Initial setup, internet access |
-| **Bridged** | ✅ Yes | ✅ Yes | Production, domain joining |
-| **Host-Only** | ✅ Yes | ❌ No | Isolated testing |
+### 7.3 Update Status
+- **Status:** ✅ Completed
+- **Reboot:** ✅ Performed
 
 ---
 
-## 6.0 PowerShell Commands Reference
-*(We'll add PowerShell equivalents for each task)*
+## 8.0 Active Directory Domain Services Installation & Promotion
 
----
+**Date:** Sep 1st 2026
+
+### Step 1: AD DS Installation & Promotion
+```powershell
+
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+Install-ADDSForest -DomainName "home.lab" -InstallDNS -Force
+
+
+
+### 8.1 Verification Results
+```powershell
+Get-ADDomain
+# ✅ Domain: home.lab
+# ✅ Forest Mode: Windows Server 2022
+
+Get-Service -Name NTDS
+# ✅ Status: Running
