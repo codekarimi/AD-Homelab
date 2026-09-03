@@ -161,3 +161,38 @@ Get-ADDomain
 
 Get-Service -Name NTDS
 # ✅ Status: Running
+
+**Date:** Sep 3rd 2026
+
+### Organizational Units (OUs)
+| OU Name | Distinguished Name |
+|---------|-------------------|
+| HR_Department | OU=HR_Department,DC=home,DC=lab |
+| IT_Department | OU=IT_Department,DC=home,DC=lab |
+| Finance_Department | OU=Finance_Department,DC=home,DC=lab |
+
+### Security Groups
+| Group Name | Department | Type |
+|------------|-----------|------|
+| HR_Staff | HR | Global Security Group |
+| IT_Staff | IT | Global Security Group |
+| Finance_Staff | Finance | Global Security Group |
+
+### Users Created
+| Full Name | Username | Department |
+|-----------|----------|------------|
+| Sarah Johnson | sjohnson | HR |
+| Michael Chen | mchen | HR |
+| Lisa Rodriguez | lrodriguez | HR |
+| David Kim | dkim | IT |
+| Alex Turner | aturner | IT |
+| Rachel Stevens | rstevens | IT |
+| Emma Watson | ewatson | Finance |
+| Olivia Martinez | omartinez | Finance |
+
+### Group Memberships
+| Group | Members |
+|-------|---------|
+| HR_Staff | sjohnson, mchen, lrodriguez |
+| IT_Staff | dkim, aturner, rstevens |
+| Finance_Staff | ewatson, jobrien, omartinez |
