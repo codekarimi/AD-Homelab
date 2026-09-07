@@ -196,3 +196,56 @@ Get-Service -Name NTDS
 | HR_Staff | sjohnson, mchen, lrodriguez |
 | IT_Staff | dkim, aturner, rstevens |
 | Finance_Staff | ewatson, jobrien, omartinez |
+
+**Date:** Sep 7th 2026
+
+### Help Desk Ticket Simulation
+Simulated real-world IT support tickets using PowerShell:
+
+| Ticket | Task | Status |
+|--------|------|--------|
+| #1 | Reset password for sjohnson | ✅ Resolved |
+| #2 | Unlock dkim account | ✅ Resolved |
+| #3 | Add aturner to IT_Staff group | ✅ Resolved |
+| #4 | Remove ewatson from Finance_Staff | ✅ Resolved |
+| #5 | Disable jobrien account | ✅ Resolved |
+| #6 | Enable jobrien account | ✅ Resolved |
+| #7 | Check sjohnson account status | ✅ Resolved |
+| #8 | Move sjohnson from HR to IT | ✅ Resolved |
+| #9 | Update mchen job title | ✅ Resolved |
+
+
+
+
+
+
+
+
+
+
+
+## 💻 PowerShell Scripts Created
+
+| Script | Purpose |
+|--------|---------|
+| `New-OU.ps1` | Create Organizational Units with duplicate checking |
+| `New-SecurityGroup.ps1` | Create Security Groups with validation |
+| `New-ADUser.ps1` | Create AD users with prompts and duplicate checking |
+
+
+## 📚 Documentation
+
+- 📝 [Complete Runbook](Documentation/Runbook.md) - Full step-by-step guide
+
+## 🔗 Related Links
+
+- [Microsoft Learn: AD DS](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/)
+- [PowerShell Documentation](https://learn.microsoft.com/en-us/powershell/)
+- [VirtualBox Documentation](https://www.virtualbox.org/wiki/Documentation)
+
+---
+
+## 📧 Contact
+
+- **GitHub:** [CodeKarimi](https://github.com/Codekarimi)
+- **LinkedIn:** [Clifford Karimi](https://www.linkedin.com/in/clifford-karimi/)
