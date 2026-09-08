@@ -215,7 +215,39 @@ Simulated real-world IT support tickets using PowerShell:
 | #9 | Update mchen job title | ✅ Resolved |
 
 
+## 11.0 Windows 10 Client Join
 
+**Date:** Sep 8th 2026
+
+### Client Specifications
+| Setting | Value |
+|---------|-------|
+| **VM Name** | Win10-Client |
+| **OS** | Windows 10 (64-bit) |
+| **RAM** | 4096 MB (4 GB) |
+| **Hard Disk** | 50 GB (VDI, Dynamically allocated) |
+| **Network** | Bridged Mode |
+
+### DNS Configuration
+| Setting | Value |
+|---------|-------|
+| **Preferred DNS** | 192.168.0.10 (DC) |
+| **Alternate DNS** | 8.8.8.8 (Google) |
+
+### Domain Join Details
+| Setting | Value |
+|---------|-------|
+| **Domain** | home.lab |
+| **Admin Credentials** | HOMELAB\Administrator |
+| **Test User** | HOMELAB\sjohnson |
+
+### Verification
+```powershell
+whoami
+# ✅ home\sjohnson
+
+Get-ADUser -Identity sjohnson
+# ✅ User details displayed
 
 
 
