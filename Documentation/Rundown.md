@@ -250,6 +250,33 @@ Get-ADUser -Identity sjohnson
 # ✅ User details displayed
 
 
+## 12.0 Group Policy Implementation
+
+**Date:** Sep 8th 2026
+
+### GPOs Created
+
+| GPO Name | Purpose | Status |
+|----------|---------|--------|
+| HR_Wallpaper_Policy | Sets desktop wallpaper for HR Department | ✅ Created & Linked |
+| HR_Drive_Mapping | Maps network drive for HR Department | ✅ Created & Linked |
+
+### Commands Used
+```powershell
+# Create GPO
+New-GPO -Name "HR_Wallpaper_Policy" -Comment "Sets desktop wallpaper for HR Department"
+
+# Configure Wallpaper
+Set-GPRegistryValue -Name "HR_Wallpaper_Policy" -Key "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System" -ValueName "Wallpaper" -Type String -Value "C:\Windows\Web\Wallpaper\Windows\img0.jpg"
+
+# Link GPO to OU
+New-GPLink -Name "HR_Wallpaper_Policy" -Target "OU=HR_Department,DC=home,DC=lab" -LinkEnabled Yes
+
+# View GPOs
+Get-GPO -All | Format-Table DisplayName, CreationTime
+
+# Force update on client
+gpupdate /force
 
 
 
